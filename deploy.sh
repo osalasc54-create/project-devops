@@ -16,3 +16,6 @@ if [ "$ACCION" = "listar" ]; then
 else
   python3 ec2/gestionar_ec2.py "$ACCION" "$INSTANCE_ID"
 fi
+
+echo "Ejecutando backup S3..."
+bash s3/backup_s3.sh "$DIRECTORIO" "$BUCKET"
