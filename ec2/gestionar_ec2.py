@@ -1,23 +1,9 @@
-#!/usr/bin/env python3
+def iniciar_instancia(instance_id):
+    ec2 = boto3.client("ec2", region_name=REGION)
+    ec2.start_instances(InstanceIds=[instance_id])
+    print(f"Instancia {instance_id} iniciada")
 
-import sys
-import boto3
 
-def listar_instancias():
-    ec2 = boto3.client("ec2")
-    response = ec2.describe_instances()
-
-    for reserva in response["Reservations"]:
-        for instancia in reserva["Instances"]:
-            print(instancia["InstanceId"], instancia["State"]["Name"])
-
-def main():
-    if len(sys.argv) < 2:
-        print("Uso: listar")
-        return
-
-    if sys.argv[1] == "listar":
-        listar_instancias()
-
-if __name__ == "__main__":
-    main()
+elif accion == "iniciar":
+    instance_id = sys.argv[2]
+    iniciar_instancia(instance_id)
