@@ -23,4 +23,12 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo "Compresión completada: $ARCHIVO"
+echo "Subiendo $ARCHIVO a s3://$BUCKET/"
+aws s3 cp "$ARCHIVO" "s3://$BUCKET/$ARCHIVO"
+
+if [ $? -ne 0 ]; then
+  echo "Error al subir archivo a S3."
+  exit 1
+fi
+
+echo "Backup subido correctamente."
